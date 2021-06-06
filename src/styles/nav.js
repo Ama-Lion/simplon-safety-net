@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const Ul = styled.ul`
   position: relative;
   list-style: none;
-  transform: rotate(-35deg) skew(20deg,5deg);
+  /* transform: rotate(-35deg) skew(20deg,5deg); */  
 `;
 
 export const ListItem = styled.a`
@@ -21,7 +21,8 @@ export const ListItem = styled.a`
   text-decoration: none;
   box-shadow: -2em 1.5em 0 #e1e1e1;
   transition: all .25s linear;
-  font-size: 5em;
+  font-size: 3em;
+  margin: 20px 0px;
   
   &:hover {
     background: #EF4056;

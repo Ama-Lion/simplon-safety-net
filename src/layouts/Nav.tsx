@@ -1,36 +1,53 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
+import { Link } from "react-router-dom";
+import { Div } from '../styles/main';
 
 import { Ul, ListItem } from '../styles/nav'
 
 interface Props {
-    
+    home?: boolean;
+    persons?: boolean;
+    records?: boolean;
+    firestation?: boolean;
 }
 
-export const Nav = (props: Props) => {
+export default function Nav({ home, persons, records, firestation }: Props): ReactElement {
     return (
-        <div>
+        <Div>
             <Ul>
-                <li>
-                    <ListItem>
-                        hello
-                    </ListItem>
-                </li>
-                <li>
-                    <ListItem>
-                        hello
-                    </ListItem>
-                </li>
-                <li>
-                    <ListItem>
-                        hello
-                    </ListItem>
-                </li>
-                <li>
-                    <ListItem>
-                        hello
-                    </ListItem>
-                </li>
+                {home && <Link to="/">
+                    <li>
+                        <ListItem>
+                            <img src="https://img.icons8.com/cotton/70/000000/home--v2.png" />
+                        </ListItem>
+                    </li>
+                </Link>}
+                {
+                    persons && <Link to="/persons">
+                        <li>
+                            <ListItem>
+                                <img src="https://img.icons8.com/office/70/000000/crowd.png" />
+                            </ListItem>
+                        </li>
+                    </Link>
+                }
+                {records && <Link to="/medical-records">
+                    <li>
+                        <ListItem>
+                            <img src="https://img.icons8.com/dotty/70/000000/treatment-plan.png" />
+                        </ListItem>
+                    </li>
+                </Link>}
+                {firestation &&
+                    <Link to="/firestations">
+                        <li>
+                            <ListItem>
+                                <img src="https://img.icons8.com/cotton/70/000000/fire-station.png" />
+                            </ListItem>
+                        </li>
+                    </Link>}
             </Ul>
-        </div>
+        </Div>
     )
 }
+
