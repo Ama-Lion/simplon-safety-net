@@ -9,21 +9,23 @@ export const Ul = styled.ul`
 
 export const ListItem = styled.a`
   background: #AB0520;
-  color: #f5eaeac9;
+  color: #ffffffb9;
   text-align: center;
-  height: 6em;
-  width: 11em;
+  height: 2.5em;
+  width: 4em;
   vertical-align: middle;
   line-height: 2.5em;
-  border-bottom: 1px solid#AB0520;;
+  border-bottom: 1px solid #060606;
   position: relative;
   display: block;
   text-decoration: none;
   box-shadow: -2em 1.5em 0 #e1e1e1;
   transition: all .25s linear;
+  font-size: 5em;
+  
   &:hover {
     background: #EF4056;
-    color: #fffcfb;
+    color: #ffffff;
     transform: translate(.9em, -.9em);
     transition: all .25s linear;
     box-shadow: -2em 2em 0 #e1e1e1;
@@ -41,11 +43,11 @@ export const ListItem = styled.a`
     }
     
     &:after {
-      height: 10.9em;
       background: #EF4056;
       width: 1em;
-      bottom: -6em;
-      left: 4.5em;
+      bottom: -2.5em;
+      left: 1em;
+      height: 4em;
     }
   }
   
@@ -54,22 +56,22 @@ export const ListItem = styled.a`
     content: '';
     position: absolute;
     transition: all .25s linear;
-    width: 1em;
+    width: .5em;
   }
 
   &:after {
-    height: 10.9em;
-    background: #AB0520;
-    bottom: -6em;
-    left: 4.5em;
+    height: 4em;
+    background: #ab0521;
+    bottom: -2.25em;
+    left: 1.5em;
     transform: rotate(90deg) skew(0,45deg);
   }
   
   &:before {
-    height: 6.3em;
+    height: 2.5em;
     background: #AB0520;
-    top: 0.40em;
-    left: -1em;;
+    top: .25em;
+    left: -.5em;
     transform: skewY(-45deg);
   }
 `;
