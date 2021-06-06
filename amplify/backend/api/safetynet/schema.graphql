@@ -1,0 +1,30 @@
+type Firestation @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  address: String
+  station: String
+  People: [Person] @connection(keyName: "byFirestation", fields: ["id"])
+}
+
+type MedicalRecord @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstName: String
+  lastName: String
+  birthDate: String
+  medications: String
+  allergies: String
+  Person: Person @connection
+}
+
+type Person @model @auth(rules: [{allow: public}]) @key(name: "byFirestation", fields: ["firestationID"]) {
+  id: ID!
+  firstName: String
+  lastName: String
+  adddress: String
+  city: String
+  zip: String
+  phone: String
+  email: String
+  Firestations: Firestation @connection
+  firestationID: ID
+  MedicalRecord: MedicalRecord @connection
+}

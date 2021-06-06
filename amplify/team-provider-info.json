@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-safetynet-staging-75211-authRole",
+      "UnauthRoleArn": "arn:aws:iam::700189526941:role/amplify-safetynet-staging-75211-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::700189526941:role/amplify-safetynet-staging-75211-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-safetynet-staging-75211-deployment",
+      "UnauthRoleName": "amplify-safetynet-staging-75211-unauthRole",
+      "StackName": "amplify-safetynet-staging-75211",
+      "StackId": "arn:aws:cloudformation:eu-west-2:700189526941:stack/amplify-safetynet-staging-75211/1a225eb0-c69c-11eb-bd3c-0a5e6f3934c6",
+      "AmplifyAppId": "d1heaad7ss6vnn"
+    }
+  }
+}
