@@ -1,11 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-function App() {
+// layouts
+import { Nav } from './layouts/Nav'
+
+// components
+
+// style
+import { Div } from './styles/main'
+
+export default function App() {
   return (
-    <div className="App">
-      <h1>Hello</h1>
-    </div>
-  );
+    <Div>
+      <Nav />
+    </Div>
+  )
 }
-
-export default App;
