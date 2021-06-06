@@ -19,7 +19,9 @@ export default class Home extends Component<Props, State> {
                 <div  >
                  <Nav persons records firestation/>
                 </div>
-                <div style={{flex: '0.3'}}  ><h1>Home</h1></div>
+                <div style={{flex: '0.3'}}  >
+                    <img src="https://i.pinimg.com/originals/e4/f4/5b/e4f45ba0bf3c96a366af88f84dbb199a.jpg" alt=""  width="400"/>
+                </div>
             </Div>
         )
     }

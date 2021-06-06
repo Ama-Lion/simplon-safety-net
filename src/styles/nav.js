@@ -23,6 +23,9 @@ export const ListItem = styled.a`
   transition: all .25s linear;
   font-size: 2em;
   margin: 20px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   &:hover {
     background: #EF4056;
