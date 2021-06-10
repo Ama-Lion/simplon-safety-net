@@ -24,9 +24,7 @@ export declare class Person {
   readonly zip?: string;
   readonly phone?: string;
   readonly email?: string;
-  readonly Firestations?: Firestation;
   readonly firestationID?: string;
-  readonly MedicalRecord?: MedicalRecord;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Person>);

@@ -24,7 +24,6 @@ type Person @model @auth(rules: [{allow: public}]) @key(name: "byFirestation", f
   zip: String
   phone: String
   email: String
-  Firestations: Firestation @connection
   firestationID: ID
-  MedicalRecord: MedicalRecord @connection
 }
+ 

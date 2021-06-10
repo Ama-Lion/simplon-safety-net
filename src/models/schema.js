@@ -139,38 +139,12 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Firestations": {
-                    "name": "Firestations",
-                    "isArray": false,
-                    "type": {
-                        "model": "Firestation"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "personFirestationsId"
-                    }
-                },
                 "firestationID": {
                     "name": "firestationID",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "MedicalRecord": {
-                    "name": "MedicalRecord",
-                    "isArray": false,
-                    "type": {
-                        "model": "MedicalRecord"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "personMedicalRecordId"
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -326,5 +300,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "458f7d51f4314cfc426f92c09ef624a7"
+    "version": "790cb730603e328a7a28ffcbd828ab05"
 };

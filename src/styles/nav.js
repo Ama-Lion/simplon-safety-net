@@ -2,8 +2,11 @@ import styled from 'styled-components'
 
 
 export const Ul = styled.ul`
-  position: relative;
+  position: fixed;
+  top: 10%;
+  left: 20px;
   list-style: none;
+  z-index: 1000;
   /* transform: rotate(-35deg) skew(20deg,5deg); */  
 `;
 

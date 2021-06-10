@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/datastore": "^2.9.4-unstable.3",
+    "@aws-amplify/ui-react": "^0.2.34",
+    "@aws-sdk/client-cognito-identity-provider": "^3.13.0",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@testing-library/jest-dom": "^5.11.4",
@@ -13,6 +16,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
+    "aws-amplify": "^3.3.14",
     "font-awesome": "^4.7.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
