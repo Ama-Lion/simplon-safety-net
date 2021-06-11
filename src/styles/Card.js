@@ -36,6 +36,7 @@ export const Card = styled.div`
     text-decoration: none;
     z-index: 0;
     overflow: hidden;
+    width: 500px;
 
     &:before {
         content: "";
@@ -44,7 +45,7 @@ export const Card = styled.div`
         top: -16px;
         right: -16px;
         background: #AB0520;
-        height: 50px;
+        height: 80px;
         width: 32px;
         border-radius: 32px;
         transform: scale(1);
@@ -55,14 +56,19 @@ export const Card = styled.div`
     &:hover:before {
         transform: scale(21);
     }
-    
+    h3{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     &:hover {
     p {
         transition: all 0.3s ease-out;
-        color: #ffffffb0;
+        color: #fff;
     }
     h3 {
+        display: flex;
         transition: all 0.3s ease-out;
         color: #ffffffb0;
     }

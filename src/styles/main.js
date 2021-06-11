@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 
 
+export const PrimaryText = styled.p`
+    color:#AB0520;
+`;
+
 export const Div = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* height: 90vh; */
 `;
 export const CardContainer = styled.div`
    margin-left: 160px;
@@ -13,5 +16,19 @@ export const CardContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    /* flex-direction: column; */
+`;
+export const Spinner = styled.div`
+      /* Loading Logo */
+    & .rotate {
+    animation: rotation 8s infinite linear;
+    width: 300px;
+    }
+    @keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
 `;

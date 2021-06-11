@@ -22,7 +22,7 @@ export default class Persons extends Component<Props, State> {
     }
     render() {
         const {persons} = this.state
-        // console.log(persons)
+        console.log(persons)
         return (
             <Div>
                 <div>

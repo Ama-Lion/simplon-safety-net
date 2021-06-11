@@ -10,7 +10,7 @@ interface Props {
     allergies: string;
 }
 
-export default function PersonCard({firstName, lastName, birthDate, medications, allergies}: Props): ReactElement {
+export default function RecordCard({firstName, lastName, birthDate, medications, allergies}: Props): ReactElement {
     return (
         <Card>
                 <h3><PrimaryText>First Name:</PrimaryText> {firstName}</h3>

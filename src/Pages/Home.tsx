@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Looding from '../Components/Looding'
 import  Nav  from '../layouts/Nav'
 import { Div } from '../styles/main'
 
