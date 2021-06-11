@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import PersonCard from '../Components/PersonCard'
 import Nav from '../layouts/Nav'
-import { Div, CardContainer } from '../styles/main'
+import { Div, CardContainer, PrimaryText } from '../styles/main'
 // @ts-ignore
 import { DataStore } from '@aws-amplify/datastore';
 import { Person } from '../models';
+import { Card, GoConer } from '../styles/Card';
 interface Props {
-    
+
 }
 interface State {
     persons: any;
@@ -16,32 +16,34 @@ export default class Persons extends Component<Props, State> {
     state: State = {
         persons: [],
     };
-    async componentDidMount(){
+    async componentDidMount() {
         const persons = await DataStore.query(Person);
-        this.setState({persons})
+        this.setState({ persons })
     }
     render() {
-        const {persons} = this.state
+        const { persons } = this.state
         console.log(persons)
         return (
             <Div>
                 <div>
-                 <Nav home records firestation/>
+                    <Nav home records firestation />
                 </div>
                 <CardContainer>
-                {persons.map((person: any) =>{
-                    return (
-
-                            <PersonCard
-                                firstName={person.firstName}
-                                lastName={person.lastName}
-                                birthDate={person.birthDate}
-                                medications={person.medications}
-                                allergies={person.allergies}
-                            />
-                            )
-                        })}
-                        </CardContainer>
+                    {persons.map((person: any) => {
+                        return (
+                            <Card>
+                                <h3><PrimaryText>First Name:</PrimaryText> {person.firstName}</h3>
+                                <h3><PrimaryText>Last Name:</PrimaryText> {person.lastName}</h3>
+                                <h3><PrimaryText>Birth Date:</PrimaryText> {person.birthDate}</h3>
+                                <GoConer className="go-corner">
+                                    <div className="go-arrow">
+                                        →
+                                    </div>
+                                </GoConer>
+                            </Card>
+                        )
+                    })}
+                </CardContainer>
             </Div>
         )
     }

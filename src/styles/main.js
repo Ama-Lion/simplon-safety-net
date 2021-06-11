@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const PrimaryText = styled.p`
     color:#AB0520;
+    margin: 0.5em;
 `;
 
 export const Div = styled.div`

@@ -60,18 +60,19 @@ export const Card = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 0em;
     }
 
     &:hover {
-    p {
-        transition: all 0.3s ease-out;
-        color: #fff;
-    }
-    h3 {
-        display: flex;
-        transition: all 0.3s ease-out;
-        color: #ffffffb0;
-    }
+        p {
+            transition: all 0.3s ease-out;
+            color: #fff;
+        }
+        h3 {
+            display: flex;
+            transition: all 0.3s ease-out;
+            color: #ffffffb0;
+        }
     }
     
 `;
