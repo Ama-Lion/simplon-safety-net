@@ -10,6 +10,9 @@ export const Overlay = styled(motion.div)`
   background: rgba(0, 0, 0, 0.3);
 `;
 export const ModalContainer = styled(motion.div)`
+display: flex;
+justify-content: center;
+align-items: center;
   width: 50%;
   height: 50%;
   background-color: white;
@@ -38,11 +41,11 @@ export const containerVariant = {
   isOpen: { top: "50%" },
   exit: { top: "-50%" }
 };
-export const OpenModalButton = styled(motion.button)`
+export const AnimatedButtonStyle = styled(motion.button)`
   font-size: 1.2rem;
   padding: 20px;
   border-radius: 50px;
   border: none;
-  background-color: #5c3aff;
+  background-color: #AB0520;
   color: white;
 `;

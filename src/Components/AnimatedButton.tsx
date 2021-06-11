@@ -1,15 +1,15 @@
 import React, { ReactElement } from 'react'
-import { OpenModalButton } from '../styles/Modal'
+import { AnimatedButtonStyle } from '../styles/Modal'
 interface Props {
   children: any;
 }
 
-export default function AnimatedOpenButton({ children }: Props): ReactElement {
+export default function AnimatedButton({ children }: Props): ReactElement {
   return (
-    <OpenModalButton 
+    <AnimatedButtonStyle 
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}>
       {children}
-    </OpenModalButton>
+    </AnimatedButtonStyle>
   );
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Modal from '../Components/Modal'
 import Nav from '../layouts/Nav'
 import { Div } from '../styles/main'
-import { OpenModalButton } from '../styles/Modal'
+import { AnimatedButtonStyle } from '../styles/Modal'
 
 interface Props {
 
@@ -17,7 +17,7 @@ export default class Home extends Component<Props, State> {
         isOpen: false,
     }
 
-    handlOpenModal(open: any) {
+    handlAnimated(open: any) {
         this.setState({
             isOpen: open,
         })
@@ -30,11 +30,19 @@ export default class Home extends Component<Props, State> {
                 <div  >
                     <Nav persons records firestation />
                 </div>
-                <OpenModalButton  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlOpenModal(true)}>
+                <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)}>
                     Open modal
-                </OpenModalButton>
-                <Modal isOpen={isOpen} handleClose={() => this.handlOpenModal(false)}>
-                    <h1>Hello</h1>
+                </AnimatedButtonStyle>
+                <Modal isOpen={isOpen} handleClose={() => this.handlAnimated(false)}>
+                    <form action="">
+                        <div className="input-field">
+                            <input type="text" id="name" required />
+                            <label htmlFor="name">Your name:</label>
+                        </div>
+                        <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)}>
+                            Open modal
+                        </AnimatedButtonStyle>
+                    </form>
                 </Modal>
                 <div style={{ flex: '0.3' }}  >
                     <img src="https://i.pinimg.com/originals/e4/f4/5b/e4f45ba0bf3c96a366af88f84dbb199a.jpg" alt="" width="400" />
