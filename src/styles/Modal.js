@@ -8,6 +8,7 @@ export const Overlay = styled(motion.div)`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 `;
 export const ModalContainer = styled(motion.div)`
 display: flex;
@@ -46,6 +47,7 @@ export const AnimatedButtonStyle = styled(motion.button)`
   padding: 20px;
   border-radius: 50px;
   border: none;
+  margin: 20px;
   background-color: #AB0520;
   color: white;
 `;

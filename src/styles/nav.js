@@ -6,7 +6,7 @@ export const Ul = styled.ul`
   top: 10%;
   left: 20px;
   list-style: none;
-  z-index: 1000;
+  z-index: 10;
   /* transform: rotate(-35deg) skew(20deg,5deg); */  
 `;
 
@@ -81,4 +81,14 @@ export const ListItem = styled.a`
     left: -.5em;
     transform: skewY(-45deg);
   }
+`;
+export const ActionNav = styled.div`
+  position: fixed;
+  top: 0%;
+  right: 30%;
+  z-index: 20;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow:  5px 5px 10px #bebebe,
+             -5px -5px 10px #ffffff;
 `;

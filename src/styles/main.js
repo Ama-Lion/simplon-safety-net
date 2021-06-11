@@ -11,8 +11,10 @@ export const Div = styled.div`
     justify-content: space-around;
     align-items: center;
 `;
+
 export const CardContainer = styled.div`
-   margin-left: 160px;
+  margin-top: 120px;
+    margin-left: 170px;
     display: flex;
     justify-content: center;
     align-items: center;
