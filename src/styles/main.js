@@ -8,7 +8,7 @@ export const Div = styled.div`
     /* height: 90vh; */
 `;
 export const CardContainer = styled.div`
-margin: 1em;
+   margin-left: 160px;
     display: flex;
     justify-content: center;
     align-items: center;

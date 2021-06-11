@@ -11,12 +11,12 @@ export const GoConer = styled.div`
      right: 0;
      background: #AB0520;
      border-radius: 0 4px 0 32px;
-
+     color: #fff;
+     cursor: pointer;
 
      &.go-arrow {
      margin-top: -4px;
-     margin-right: -4px;
-     color: #ffffffb0;
+     margin-right: -20px;
      font-family: courier, sans;
      }
 `
@@ -44,7 +44,7 @@ export const Card = styled.div`
         top: -16px;
         right: -16px;
         background: #AB0520;
-        height: 40px;
+        height: 50px;
         width: 32px;
         border-radius: 32px;
         transform: scale(1);
