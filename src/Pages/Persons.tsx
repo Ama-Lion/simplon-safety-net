@@ -5,7 +5,7 @@ import Modal from '../Components/Modal'
 import { AnimatedButtonStyle } from '../styles/Modal'
 // @ts-ignore
 import { DataStore } from '@aws-amplify/datastore';
-import { Person } from '../models';
+import { Person, Firestation } from '../models';
 import { Card, GoConer } from '../styles/Card';
 import { ActionNav } from '../styles/nav'
 interface Props {
@@ -14,25 +14,51 @@ interface Props {
 interface State {
     persons: any;
     isOpen: boolean;
+    firestations: any;
+    formData: any;
 }
 
 export default class Persons extends Component<Props, State> {
     state: State = {
         persons: [],
         isOpen: false,
+        firestations: [],
+        formData: {
+            firstName: "",            
+            lastName: "",            
+            phone: "",            
+            email: "",            
+            adddress: "",            
+            city: "",            
+            zip: "",            
+            createdAt: "",            
+            firestationID: "",            
+        },
     };
     async componentDidMount() {
         const persons = await DataStore.query(Person);
-        this.setState({ persons })
+        const firestations = await DataStore.query(Firestation);
+        
+        this.setState({ 
+            persons: persons,
+            firestations: firestations,
+         })
     }
     handlAnimated(open: any) {
         this.setState({
             isOpen: open,
         })
     }
+    // handleChange = (e: any)=> {
+    //     e.preventDefault;
+    //     console.log(e.event.target.value)
+    // }
+    handleSubmit = (e?: any)=> {
+        e.preventDefault();
+        console.log(e.event.target.value)
+    }
     render() {
-        const { persons, isOpen } = this.state
-        console.log(persons)
+        const { persons, isOpen, firestations } = this.state;
         return (
             <Div>
                 <div>
@@ -40,22 +66,62 @@ export default class Persons extends Component<Props, State> {
                 </div>
                 <ActionNav>
                     <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)}>
-                        Open modal
-                    </AnimatedButtonStyle>
-                    <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)}>
-                        Open modal
-                    </AnimatedButtonStyle>
-                    <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)}>
-                        Open modal
+                        Add a Person
                     </AnimatedButtonStyle>
                 </ActionNav>
                 <Modal isOpen={isOpen} handleClose={() => this.handlAnimated(false)}>
                     <form action="">
-                        <div className="input-field">
-                            <input type="text" id="name" required />
-                            <label htmlFor="name">Your name:</label>
+                        <div className="form-fields">
+                            <div className="input-field">
+                                <input type="text" id="firstName" required />
+                                <label htmlFor="firstName">First name:</label>
+                            </div>
+                            <div className="input-field">
+                                <input type="text" id="lastName" required />
+                                <label htmlFor="lastName">Last name:</label>
+                            </div>
                         </div>
-                        <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)}>
+                        <div className="form-fields">
+                            <div className="input-field">
+                                <input type="number" id="phone" required />
+                                <label htmlFor="phone">phone:</label>
+                            </div>
+                            <div className="input-field">
+                                <input type="email" id="email" required />
+                                <label htmlFor="email">Email:</label>
+                            </div>
+                        </div>
+                        <div className="form-fields">
+                            <div className="input-field">
+                                <input type="text" id="adddress" required />
+                                <label htmlFor="adddress">Adddress:</label>
+                            </div>
+                            <div className="input-field">
+                                <input type="text" id="city" required />
+                                <label htmlFor="city">City:</label>
+                            </div>
+                            <div className="input-field">
+                                <input type="number" id="zip" required />
+                                <label htmlFor="zip">Zip:</label>
+                            </div>
+                        </div>
+                        <div className="form-fields">
+                            <div className="input-field">
+                                <input type="date" id="createdAt" required />
+                                <label htmlFor="createdAt">Creted At:</label>
+                            </div>
+                            <div className="input-field">
+                               <select id="firestationID" required>
+                                   <option>Choose Firestation</option>
+                                   {firestations.map((firestation: any)=> {
+                                       return (
+                                        <option value={firestation.id}>{firestation.address}</option>
+                                       )
+                                   })}
+                               </select>
+                            </div>
+                        </div>
+                        <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => {this.handlAnimated(false); this.handleSubmit()}}>
                             Open modal
                         </AnimatedButtonStyle>
                     </form>

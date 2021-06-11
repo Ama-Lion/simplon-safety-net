@@ -15,7 +15,7 @@ display: flex;
 justify-content: center;
 align-items: center;
   width: 50%;
-  height: 50%;
+  height: 70%;
   background-color: white;
   position: absolute;
   top: 50%;
