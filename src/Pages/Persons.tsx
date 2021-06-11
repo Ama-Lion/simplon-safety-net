@@ -17,8 +17,8 @@ export default class Persons extends Component<Props, State> {
         persons: [],
     };
     async componentDidMount(){
-        const models = await DataStore.query(Person);
-        this.setState({persons: models})
+        const persons = await DataStore.query(Person);
+        this.setState({persons})
     }
     render() {
         const {persons} = this.state
