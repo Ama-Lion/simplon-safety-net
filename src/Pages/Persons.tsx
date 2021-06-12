@@ -15,7 +15,14 @@ interface State {
     persons: any;
     isOpen: boolean;
     firestations: any;
-    formData: any;
+    firstName: any;            
+    lastName: any;            
+    phone: any;            
+    email: any;            
+    adddress: any;            
+    city: any;            
+    zip: any;                     
+    firestationID: any;
 }
 
 export default class Persons extends Component<Props, State> {
@@ -23,17 +30,14 @@ export default class Persons extends Component<Props, State> {
         persons: [],
         isOpen: false,
         firestations: [],
-        formData: {
-            firstName: "",            
-            lastName: "",            
-            phone: "",            
-            email: "",            
-            adddress: "",            
-            city: "",            
-            zip: "",            
-            createdAt: "",            
-            firestationID: "",            
-        },
+        firstName: "",            
+        lastName: "",            
+        phone: "",            
+        email: "",            
+        adddress: "",            
+        city: "",            
+        zip: "",                      
+        firestationID: "",
     };
     async componentDidMount() {
         const persons = await DataStore.query(Person);
@@ -49,16 +53,36 @@ export default class Persons extends Component<Props, State> {
             isOpen: open,
         })
     }
-    // handleChange = (e: any)=> {
-    //     e.preventDefault;
-    //     console.log(e.event.target.value)
-    // }
-    handleSubmit = (e?: any)=> {
+    handleChange = (e: any)=> {
         e.preventDefault();
-        console.log(e.event.target.value)
+        const value = e.target.value;
+        this.setState({
+            ...this.state,
+            [e.target.name]: value,
+        })
+    }
+    handleSubmit = async (e?: any)=> {
+        e.preventDefault();
+        await DataStore.save(
+            new Person({
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                phone: this.state.phone,
+                email: this.state.email,
+                adddress: this.state.adddress,
+                city: this.state.city,
+                zip: this.state.zip,
+                firestationID: this.state.firestationID,
+            })
+        )
+        const persons = await DataStore.query(Person);
+        this.setState({ 
+            persons: persons,
+         })
     }
     render() {
         const { persons, isOpen, firestations } = this.state;
+        console.log(this.state)
         return (
             <Div>
                 <div>
@@ -70,48 +94,48 @@ export default class Persons extends Component<Props, State> {
                     </AnimatedButtonStyle>
                 </ActionNav>
                 <Modal isOpen={isOpen} handleClose={() => this.handlAnimated(false)}>
-                    <form action="">
+                    <form  onSubmit={this.handleSubmit} >
                         <div className="form-fields">
                             <div className="input-field">
-                                <input type="text" id="firstName" required />
+                                <input type="text" id="firstName" name="firstName" onChange={this.handleChange} required />
                                 <label htmlFor="firstName">First name:</label>
                             </div>
                             <div className="input-field">
-                                <input type="text" id="lastName" required />
+                                <input type="text" id="lastName" name="lastName" onChange={this.handleChange} required />
                                 <label htmlFor="lastName">Last name:</label>
                             </div>
                         </div>
                         <div className="form-fields">
                             <div className="input-field">
-                                <input type="number" id="phone" required />
+                                <input type="number" id="phone" name="phone" onChange={this.handleChange} required />
                                 <label htmlFor="phone">phone:</label>
                             </div>
                             <div className="input-field">
-                                <input type="email" id="email" required />
+                                <input type="email" id="email" name="email" onChange={this.handleChange} required />
                                 <label htmlFor="email">Email:</label>
                             </div>
                         </div>
                         <div className="form-fields">
                             <div className="input-field">
-                                <input type="text" id="adddress" required />
+                                <input type="text" id="adddress" name="adddress" onChange={this.handleChange} required />
                                 <label htmlFor="adddress">Adddress:</label>
                             </div>
                             <div className="input-field">
-                                <input type="text" id="city" required />
+                                <input type="text" id="city" name="city" onChange={this.handleChange} required />
                                 <label htmlFor="city">City:</label>
                             </div>
                             <div className="input-field">
-                                <input type="number" id="zip" required />
+                                <input type="number" id="zip" name="zip" onChange={this.handleChange} required />
                                 <label htmlFor="zip">Zip:</label>
                             </div>
                         </div>
                         <div className="form-fields">
-                            <div className="input-field">
-                                <input type="date" id="createdAt" required />
-                                <label htmlFor="createdAt">Creted At:</label>
+                        <div className="input-field">
+                                <input type="date" id="birthDate" name="birthDate" onChange={this.handleChange} required />
+                                <label htmlFor="birthDate">Zip:</label>
                             </div>
                             <div className="input-field">
-                               <select id="firestationID" required>
+                               <select id="firestationID" name="firestationID" onChange={this.handleChange} required>
                                    <option>Choose Firestation</option>
                                    {firestations.map((firestation: any)=> {
                                        return (
@@ -121,8 +145,8 @@ export default class Persons extends Component<Props, State> {
                                </select>
                             </div>
                         </div>
-                        <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => {this.handlAnimated(false); this.handleSubmit()}}>
-                            Open modal
+                        <AnimatedButtonStyle type="submit" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(false)}>
+                            Save
                         </AnimatedButtonStyle>
                     </form>
                 </Modal>
@@ -132,7 +156,6 @@ export default class Persons extends Component<Props, State> {
                             <Card>
                                 <h3><PrimaryText>First Name:</PrimaryText> {person.firstName}</h3>
                                 <h3><PrimaryText>Last Name:</PrimaryText> {person.lastName}</h3>
-                                <h3><PrimaryText>Birth Date:</PrimaryText> {person.birthDate}</h3>
                                 <GoConer className="go-corner">
                                     <div className="go-arrow">
                                         →
