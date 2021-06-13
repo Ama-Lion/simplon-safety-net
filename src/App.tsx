@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import FirestationInfo from './Pages/FirestationInfo';
 
 
 // pages
@@ -22,6 +23,9 @@ export default function App() {
          </Route>
          <Route path="/persons/:id" exact>
            <PersonInfo />
+         </Route>
+               <Route path="/firestations/:id" exact>
+           <FirestationInfo />
          </Route>
          <Route path="/persons">
            <Persons />
