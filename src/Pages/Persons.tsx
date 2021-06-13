@@ -6,8 +6,10 @@ import { AnimatedButtonStyle } from '../styles/Modal'
 // @ts-ignore
 import { DataStore } from '@aws-amplify/datastore';
 import { Person, Firestation } from '../models';
-import { Card, GoConer } from '../styles/Card';
+import { Card, Edit, GoConer, Trash } from '../styles/Card';
 import { ActionNav } from '../styles/nav'
+import { Link } from 'react-router-dom'
+import PersonForm from '../Components/Person/PersonForm'
 interface Props {
 
 }
@@ -15,13 +17,13 @@ interface State {
     persons: any;
     isOpen: boolean;
     firestations: any;
-    firstName: any;            
-    lastName: any;            
-    phone: any;            
-    email: any;            
-    adddress: any;            
-    city: any;            
-    zip: any;                     
+    firstName: any;
+    lastName: any;
+    phone: any;
+    email: any;
+    adddress: any;
+    city: any;
+    zip: any;
     firestationID: any;
 }
 
@@ -30,30 +32,30 @@ export default class Persons extends Component<Props, State> {
         persons: [],
         isOpen: false,
         firestations: [],
-        firstName: "",            
-        lastName: "",            
-        phone: "",            
-        email: "",            
-        adddress: "",            
-        city: "",            
-        zip: "",                      
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        adddress: "",
+        city: "",
+        zip: "",
         firestationID: "",
     };
     async componentDidMount() {
         const persons = await DataStore.query(Person);
         const firestations = await DataStore.query(Firestation);
-        
-        this.setState({ 
+
+        this.setState({
             persons: persons,
             firestations: firestations,
-         })
+        })
     }
     handlAnimated(open: any) {
         this.setState({
             isOpen: open,
         })
     }
-    handleChange = (e: any)=> {
+    handleChange = (e: any) => {
         e.preventDefault();
         const value = e.target.value;
         this.setState({
@@ -61,7 +63,7 @@ export default class Persons extends Component<Props, State> {
             [e.target.name]: value,
         })
     }
-    handleSubmit = async (e?: any)=> {
+    handleSubmit = async (e?: any) => {
         e.preventDefault();
         await DataStore.save(
             new Person({
@@ -76,10 +78,20 @@ export default class Persons extends Component<Props, State> {
             })
         )
         const persons = await DataStore.query(Person);
-        this.setState({ 
+        this.setState({
             persons: persons,
-         })
+        })
     }
+    handleDelete =  async (id?: any) => {
+        const todelete = await DataStore.query(Person, `${id}`);
+        // @ts-ignore
+        DataStore.delete(todelete);
+        const persons = await DataStore.query(Person);
+        this.setState({
+            persons: persons,
+        })
+    }
+    
     render() {
         const { persons, isOpen, firestations } = this.state;
         console.log(this.state)
@@ -94,73 +106,32 @@ export default class Persons extends Component<Props, State> {
                     </AnimatedButtonStyle>
                 </ActionNav>
                 <Modal isOpen={isOpen} handleClose={() => this.handlAnimated(false)}>
-                    <form  onSubmit={this.handleSubmit} >
-                        <div className="form-fields">
-                            <div className="input-field">
-                                <input type="text" id="firstName" name="firstName" onChange={this.handleChange} required />
-                                <label htmlFor="firstName">First name:</label>
-                            </div>
-                            <div className="input-field">
-                                <input type="text" id="lastName" name="lastName" onChange={this.handleChange} required />
-                                <label htmlFor="lastName">Last name:</label>
-                            </div>
-                        </div>
-                        <div className="form-fields">
-                            <div className="input-field">
-                                <input type="number" id="phone" name="phone" onChange={this.handleChange} required />
-                                <label htmlFor="phone">phone:</label>
-                            </div>
-                            <div className="input-field">
-                                <input type="email" id="email" name="email" onChange={this.handleChange} required />
-                                <label htmlFor="email">Email:</label>
-                            </div>
-                        </div>
-                        <div className="form-fields">
-                            <div className="input-field">
-                                <input type="text" id="adddress" name="adddress" onChange={this.handleChange} required />
-                                <label htmlFor="adddress">Adddress:</label>
-                            </div>
-                            <div className="input-field">
-                                <input type="text" id="city" name="city" onChange={this.handleChange} required />
-                                <label htmlFor="city">City:</label>
-                            </div>
-                            <div className="input-field">
-                                <input type="number" id="zip" name="zip" onChange={this.handleChange} required />
-                                <label htmlFor="zip">Zip:</label>
-                            </div>
-                        </div>
-                        <div className="form-fields">
-                        <div className="input-field">
-                                <input type="date" id="birthDate" name="birthDate" onChange={this.handleChange} required />
-                                <label htmlFor="birthDate">Zip:</label>
-                            </div>
-                            <div className="input-field">
-                               <select id="firestationID" name="firestationID" onChange={this.handleChange} required>
-                                   <option>Choose Firestation</option>
-                                   {firestations.map((firestation: any)=> {
-                                       return (
-                                        <option value={firestation.id}>{firestation.address}</option>
-                                       )
-                                   })}
-                               </select>
-                            </div>
-                        </div>
-                        <AnimatedButtonStyle type="submit" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(false)}>
+                    <PersonForm
+                        handleChange={this.handleChange}
+                        handleSubmit={this.handleSubmit}
+                        firestations={firestations}
+                        values={this.state}
+                        button={<AnimatedButtonStyle type="submit" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(false)}>
                             Save
-                        </AnimatedButtonStyle>
-                    </form>
+                        </AnimatedButtonStyle>}
+                    />
                 </Modal>
                 <CardContainer>
                     {persons.map((person: any) => {
                         return (
                             <Card>
+                                <Trash onClick={() => this.handleDelete(person.id)}>
+                                    <img src="https://img.icons8.com/carbon-copy/35/000000/trash.png"/>
+                                </Trash>
                                 <h3><PrimaryText>First Name:</PrimaryText> {person.firstName}</h3>
                                 <h3><PrimaryText>Last Name:</PrimaryText> {person.lastName}</h3>
-                                <GoConer className="go-corner">
-                                    <div className="go-arrow">
-                                        →
-                                    </div>
-                                </GoConer>
+                                <Link to={`/persons/${person.id}`} >
+                                    <GoConer className="go-corner">
+                                        <div className="go-arrow">
+                                            →
+                                        </div>
+                                    </GoConer>
+                                </Link>
                             </Card>
                         )
                     })}

@@ -83,6 +83,10 @@ export const ListItem = styled.a`
   }
 `;
 export const ActionNav = styled.div`
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 0.5em;
   position: fixed;
   top: 0%;
   right: 30%;
@@ -91,4 +95,8 @@ export const ActionNav = styled.div`
   background: linear-gradient(145deg, #cacaca, #f0f0f0);
   box-shadow:  5px 5px 10px #bebebe,
              -5px -5px 10px #ffffff;
+    h1{
+      color: #ab0521;
+      margin-left: 20px;
+    }
 `;

@@ -20,6 +20,46 @@ export const GoConer = styled.div`
      font-family: courier, sans;
      }
 `
+export const Trash = styled.div`
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: absolute;
+     width: 40px;
+     height: 40px;
+     overflow: hidden;
+     top: 0;
+     left: 0;
+     /* background: #AB0520; */
+     border-radius: 0 4px 0 32px;
+     cursor: pointer;
+
+     &.img{
+     margin-top: -4px;
+     margin-right: -20px;
+     font-family: courier, sans;
+     }
+`
+export const Edit = styled.div`
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: absolute;
+     width: 40px;
+     height: 40px;
+     overflow: hidden;
+     top: 0;
+     left: 50px;
+     /* background: #AB0520; */
+     border-radius: 0 4px 0 32px;
+     cursor: pointer;
+
+     &.img{
+     margin-top: -4px;
+     margin-right: -20px;
+     font-family: courier, sans;
+     }
+`
 
 export const Card = styled.div`
     border-radius: 51px;
@@ -62,6 +102,15 @@ export const Card = styled.div`
         align-items: center;
         margin: 0em;
     }
+    h1{
+        text-align: center;
+        border-radius: 50px;
+        padding: 0.5em;
+        color:#AB0520;
+        background: linear-gradient(145deg, #cacaca, #f0f0f0);
+        box-shadow:  5px 5px 10px #bebebe,
+             -5px -5px 10px #ffffff;
+    }
 
     &:hover {
         p {
@@ -72,6 +121,12 @@ export const Card = styled.div`
             display: flex;
             transition: all 0.3s ease-out;
             color: #ffffffb0;
+        }
+        h1{
+            color: #fff;
+            background: linear-gradient(145deg, #9a051d, #b70522);
+            box-shadow:  20px 20px 60px #91041b,
+             -20px -20px 60px #c50625;
         }
     }
     
