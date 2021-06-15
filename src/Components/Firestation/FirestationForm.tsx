@@ -1,4 +1,3 @@
-import { button } from 'aws-amplify'
 import React, { ReactElement } from 'react'
 
 interface Props {
@@ -24,7 +23,7 @@ export default function FirestationForm({handleChange, handleSubmit, button, val
                 <label htmlFor="address">Station Address:</label>
             </div>
 
-        {button}
-    </form>
+            {button}
+        </form>
     )
 }

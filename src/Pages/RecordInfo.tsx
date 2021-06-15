@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { DataStore } from '@aws-amplify/datastore';
-import { Person, Firestation } from '../models';
+import { Person, MedicalRecord} from '../models';
 import { AnimatedButtonStyle } from '../styles/Modal';
 import { ActionNav } from '../styles/nav';
 import Modal from '../Components/Modal';
-import FirestationForm from '../Components/Firestation/FirestationForm';
-import FirestationInfoComponent from '../Components/Firestation/FirestationInfoComponent';
+import RecordForm from '../Components/Record/RecordForm';
+import RecordInfoComponent from '../Components/Record/RecordInfoComponent';
 interface Props {
 
 }
@@ -13,45 +13,57 @@ interface State {
     isOpen: boolean;
     id: any;
     persons: any;
-    firestation: any
-    address: any,
-    station: any,
+    record: any;
+    firstName: any;
+    lastName: any;
+    birthDate: any;
+    allergies: any;
+    medications: any;
+    medicalRecordPersonId: any;
 }
 
-export default class FirestationInfo extends Component<Props, State> {
+export default class RecordInfo extends Component<Props, State> {
     state: State = {
         isOpen: false,
         id: "",
         persons: [],
-        firestation: [],
-        address: "string",
-        station: "string",
+        record: [],
+        firstName: "",
+        lastName: "",
+        birthDate: "",
+        allergies: [],
+        medications: [],
+        medicalRecordPersonId: "",
     }
 
     async componentDidMount() {
         const pathArray = window.location.pathname.split('/');
         const id = pathArray[2];
-        const firestation = await DataStore.query(Firestation, c => c.id("eq", `${id}`));
-        const persons = await DataStore.query(Person, c => c.firestationID("eq", `${id}`));
-        this.setState({ id, persons, firestation });
+        const record = await DataStore.query(MedicalRecord, c => c.id("eq", `${id}`));
+        const persons = await DataStore.query(Person);
+        this.setState({ id, persons, record});
         this.setState({
-            address: firestation[0].address,
-            station: firestation[0].station,
+            firstName: record[0].firstName,
+            lastName: record[0].lastName,
+            birthDate: record[0].birthDate,
+            allergies: record[0].allergies,
+            medications: record[0].medications,
+            // medicalRecordPersonId: record[0].medicalRecordPersonId,
         })
     }
     handleSubmit = async (e?: any) => {
         e.preventDefault();
         // @ts-ignore
-        const CURRENT_USER = await DataStore.query(Firestation,`${this.state.id}`);
+        const CURRENT = await DataStore.query(MedicalRecord,`${this.state.id}`);
         const updatedStation = await DataStore.save(
             // @ts-ignore
-            Firestation.copyOf(CURRENT_USER, f => {
-              f.station = this.state.station;
-              f.address = this.state.address;
+            MedicalRecord.copyOf(CURRENT, r => {
+
           })
         );
-        const firestation = await DataStore.query(Firestation, c => c.id("eq", `${this.state.id}`));
-        this.setState({firestation})
+        const record= await DataStore.query(MedicalRecord, c => c.id("eq", `${this.state.id}`));
+        // @ts-ignore
+        this.setState({record})
     }
     handlAnimated(open: any) {
         this.setState({
@@ -67,10 +79,10 @@ export default class FirestationInfo extends Component<Props, State> {
         })
     }
     handleDelete =  async () => {
-        const todelete = await DataStore.query(Firestation, `${this.state.id}`);
+        const todelete = await DataStore.query(MedicalRecord, `${this.state.id}`);
         // @ts-ignore
         DataStore.delete(todelete);
-        window.location.href = "/firestations";
+        window.location.href = "/medical-records";
     }
     render() {
         const { persons, isOpen } = this.state;
@@ -81,19 +93,21 @@ export default class FirestationInfo extends Component<Props, State> {
                 </AnimatedButtonStyle>
                 <ActionNav>
                     
-                    <h1>Peoples Connected to the Station</h1>
+                    <h1>Record Details</h1>
                     <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)} >
-                        Edit Station
+                        Edit Record
                     </AnimatedButtonStyle>
                     <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handleDelete()} >
-                        Delete Station
+                        Delete Record
                     </AnimatedButtonStyle>
                 </ActionNav>
                 <Modal isOpen={isOpen} handleClose={() => this.handlAnimated(false)}>
-                    <FirestationForm
+                    <RecordForm
                         values={this.state}
                         handleChange={this.handleChange}
                         handleSubmit={this.handleSubmit}
+                        handleAllergiesChange=""
+                        handleMedicationsChange={"hello"}
                         button={
                             <AnimatedButtonStyle type="submit" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(false)}>
                                 Save
@@ -101,7 +115,7 @@ export default class FirestationInfo extends Component<Props, State> {
                         }
                     />
                 </Modal>
-                <FirestationInfoComponent persons={persons} />
+                {/* <RecordInfoComponent person={person} firestation={firestation} /> */}
             </div>
         )
     }

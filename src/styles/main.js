@@ -19,6 +19,18 @@ export const MainTitle = styled.h1`
   box-shadow:  5px 5px 10px #bebebe,
              -5px -5px 10px #ffffff;
 `;
+export const NotFoundTitle = styled.h1`
+  position: absolute;
+  right: 30%;
+  top: 30%;
+  padding: 30px;
+  text-align: center;
+  border-radius: 50px;
+  color:#AB0520;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow:  5px 5px 10px #bebebe,
+             -5px -5px 10px #ffffff;
+`;
 
 export const CardContainer = styled.div`
   margin-top: 120px;

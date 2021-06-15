@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const Ul = styled.ul`
   position: fixed;
   top: 10%;
-  left: 20px;
+  left: 40px;
   list-style: none;
   z-index: 10;
   /* transform: rotate(-35deg) skew(20deg,5deg); */  
@@ -22,10 +22,10 @@ export const ListItem = styled.a`
   position: relative;
   display: block;
   text-decoration: none;
-  box-shadow: -2em 1.5em 0 #e1e1e1;
+  /* box-shadow: -2em 1.5em 0 #e1e1e1; */
   transition: all .25s linear;
   font-size: 2em;
-  margin: 20px 0px;
+  margin: 50px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,8 +88,8 @@ export const ActionNav = styled.div`
  align-items: center;
  padding: 0.5em;
   position: fixed;
-  top: 0%;
-  right: 30%;
+  top: 1%;
+  left: 25%;
   z-index: 20;
   border-radius: 50px;
   background: linear-gradient(145deg, #cacaca, #f0f0f0);

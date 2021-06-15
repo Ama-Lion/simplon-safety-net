@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, GoConer, Trash } from '../../styles/Card'
-import { CardContainer, PrimaryText } from '../../styles/main'
+import { CardContainer, NotFoundTitle, PrimaryText } from '../../styles/main'
 
 interface Props {
     persons: any;
@@ -10,6 +10,8 @@ interface Props {
 export default function FirestationInfoComponent({ persons }: Props): ReactElement {
     return (
         <div style={{ display: 'flex', margin: "3em", flexWrap: 'wrap', justifyContent: 'center' }} >
+                  {
+                    persons.length === 0 ?   <NotFoundTitle>Sorry no Persons available available</NotFoundTitle>: 
             <CardContainer>
                 {persons.map((person: any) => {
                     return (
@@ -29,7 +31,8 @@ export default function FirestationInfoComponent({ persons }: Props): ReactEleme
                     </Card>
                     )
                 })}
-            </CardContainer>
+            </CardContainer>}
+            
         </div>
     )
 }

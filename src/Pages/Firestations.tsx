@@ -39,7 +39,8 @@ export default class Firestations extends Component<Props, State> {
             [e.target.name]: value,
         })
     }
-    handleSubmit = async () => {
+    handleSubmit = async (e?: any) => {
+        e.preventDefault();
         await DataStore.save(
             new Firestation(
                 {
@@ -48,6 +49,10 @@ export default class Firestations extends Component<Props, State> {
                 },
             )
         )
+        const firestations = await DataStore.query(Firestation);
+        this.setState({
+            firestations: firestations,
+        })
     }
 
     handleDelete = async (id?: any) => {
@@ -58,7 +63,7 @@ export default class Firestations extends Component<Props, State> {
         this.setState({
             firestations: firestations,
         })
-    }    
+    }
     handlAnimated(open: any) {
         this.setState({
             isOpen: open,
@@ -72,7 +77,7 @@ export default class Firestations extends Component<Props, State> {
                     <Nav persons records home />
                 </div>
                 <ActionNav>
-                    <h1>All Stations</h1>
+                    <h1>{firestations.length} Stations</h1>
                     <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)}>
                         Add Station
                     </AnimatedButtonStyle>
@@ -80,19 +85,19 @@ export default class Firestations extends Component<Props, State> {
                 <CardContainer>
                     {firestations.map((firestation: any) => {
                         return (
-                            <Card>
+                            <Card key={firestation.id}>
                                 <Trash onClick={() => this.handleDelete(firestation.id)}>
                                     <img src="https://img.icons8.com/carbon-copy/35/000000/trash.png" />
                                 </Trash>
                                 <h3><PrimaryText>Station:</PrimaryText>{firestation.station}</h3>
                                 <h3><PrimaryText>Address:</PrimaryText> {firestation.address}</h3>
                                 <Link to={`/firestations/${firestation.id}`} >
-                            <GoConer className="go-corner">
-                                <div className="go-arrow">
-                                    →
-                                </div>
-                            </GoConer>
-                        </Link>
+                                    <GoConer className="go-corner">
+                                        <div className="go-arrow">
+                                            →
+                                        </div>
+                                    </GoConer>
+                                </Link>
                             </Card>
                         )
                     })}

@@ -146,6 +146,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "medicalrecordID": {
+                    "name": "medicalrecordID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -176,6 +183,15 @@ export const schema = {
                         "name": "byFirestation",
                         "fields": [
                             "firestationID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byMedicalRecord",
+                        "fields": [
+                            "medicalrecordID"
                         ]
                     }
                 },
@@ -230,29 +246,32 @@ export const schema = {
                 },
                 "medications": {
                     "name": "medications",
-                    "isArray": false,
+                    "isArray": true,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true
                 },
                 "allergies": {
                     "name": "allergies",
-                    "isArray": false,
+                    "isArray": true,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true
                 },
-                "Person": {
-                    "name": "Person",
-                    "isArray": false,
+                "People": {
+                    "name": "People",
+                    "isArray": true,
                     "type": {
                         "model": "Person"
                     },
                     "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "medicalRecordPersonId"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "medicalrecordID"
                     }
                 },
                 "createdAt": {
@@ -300,5 +319,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "790cb730603e328a7a28ffcbd828ab05"
+    "version": "417b8735d4e7910532aab8ca68a9cad9"
 };

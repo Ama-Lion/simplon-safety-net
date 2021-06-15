@@ -1,11 +1,9 @@
-import { button } from 'aws-amplify'
+
 import React, { ReactElement } from 'react'
-import { AnimatedButtonStyle } from '../../styles/Modal'
 
 interface Props {
     handleChange: any;
     handleSubmit: any;
-    firestations: any;
     button: any;
     values: {
         firstName: any;
@@ -20,7 +18,7 @@ interface Props {
 
 }
 
-export default function PersonForm({handleChange, handleSubmit, firestations, button, values}: Props): ReactElement {
+export default function PersonForm({handleChange, handleSubmit, button, values}: Props): ReactElement {
     return (
         <form  onSubmit={handleSubmit} >
         <div className="form-fields">
@@ -55,18 +53,6 @@ export default function PersonForm({handleChange, handleSubmit, firestations, bu
             <div className="input-field">
                 <input type="number" id="zip" name="zip"  value={values.zip}  onChange={handleChange} required />
                 <label htmlFor="zip">Zip:</label>
-            </div>
-        </div>
-        <div className="form-fields">
-            <div className="input-field">
-               <select id="firestationID" name="firestationID" onChange={handleChange} required>
-                   <option>Choose Firestation</option>
-                   {firestations.map((firestation: any)=> {
-                       return (
-                        <option value={firestation.id}>{firestation.address}</option>
-                       )
-                   })}
-               </select>
             </div>
         </div>
         {button}

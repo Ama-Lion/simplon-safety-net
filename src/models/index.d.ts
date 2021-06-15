@@ -25,6 +25,7 @@ export declare class Person {
   readonly phone?: string;
   readonly email?: string;
   readonly firestationID?: string;
+  readonly medicalrecordID?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Person>);
@@ -36,9 +37,9 @@ export declare class MedicalRecord {
   readonly firstName?: string;
   readonly lastName?: string;
   readonly birthDate?: string;
-  readonly medications?: string;
-  readonly allergies?: string;
-  readonly Person?: Person;
+  readonly medications?: (string | null)[];
+  readonly allergies?: (string | null)[];
+  readonly People?: (Person | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<MedicalRecord>);

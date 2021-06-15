@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Nav from '../layouts/Nav'
-import { Div, CardContainer, PrimaryText } from '../styles/main'
+import { Div, CardContainer, PrimaryText, NotFoundTitle } from '../styles/main'
 import Modal from '../Components/Modal'
 import { AnimatedButtonStyle } from '../styles/Modal'
 // @ts-ignore
@@ -65,6 +65,7 @@ export default class Persons extends Component<Props, State> {
     }
     handleSubmit = async (e?: any) => {
         e.preventDefault();
+        const firestation = await DataStore.query(Firestation, c => c.address("eq", `${this.state.adddress}`));
         await DataStore.save(
             new Person({
                 firstName: this.state.firstName,
@@ -74,7 +75,7 @@ export default class Persons extends Component<Props, State> {
                 adddress: this.state.adddress,
                 city: this.state.city,
                 zip: this.state.zip,
-                firestationID: this.state.firestationID,
+                firestationID: firestation[0].id,
             })
         )
         const persons = await DataStore.query(Person);
@@ -82,7 +83,7 @@ export default class Persons extends Component<Props, State> {
             persons: persons,
         })
     }
-    handleDelete =  async (id?: any) => {
+    handleDelete = async (id?: any) => {
         const todelete = await DataStore.query(Person, `${id}`);
         // @ts-ignore
         DataStore.delete(todelete);
@@ -91,16 +92,17 @@ export default class Persons extends Component<Props, State> {
             persons: persons,
         })
     }
-    
+
     render() {
-        const { persons, isOpen, firestations } = this.state;
-        console.log(this.state)
+        const { persons, isOpen } = this.state;
+
         return (
             <Div>
                 <div>
                     <Nav home records firestation />
                 </div>
                 <ActionNav>
+                    <h1>{persons.length} Persons</h1>
                     <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(true)}>
                         Add a Person
                     </AnimatedButtonStyle>
@@ -109,33 +111,35 @@ export default class Persons extends Component<Props, State> {
                     <PersonForm
                         handleChange={this.handleChange}
                         handleSubmit={this.handleSubmit}
-                        firestations={firestations}
                         values={this.state}
                         button={<AnimatedButtonStyle type="submit" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(false)}>
                             Save
                         </AnimatedButtonStyle>}
                     />
                 </Modal>
-                <CardContainer>
-                    {persons.map((person: any) => {
-                        return (
-                            <Card>
-                                <Trash onClick={() => this.handleDelete(person.id)}>
-                                    <img src="https://img.icons8.com/carbon-copy/35/000000/trash.png"/>
-                                </Trash>
-                                <h3><PrimaryText>First Name:</PrimaryText> {person.firstName}</h3>
-                                <h3><PrimaryText>Last Name:</PrimaryText> {person.lastName}</h3>
-                                <Link to={`/persons/${person.id}`} >
-                                    <GoConer className="go-corner">
-                                        <div className="go-arrow">
-                                            →
-                                        </div>
-                                    </GoConer>
-                                </Link>
-                            </Card>
-                        )
-                    })}
-                </CardContainer>
+                {
+                    persons.length === 0 ? <NotFoundTitle>Sorry no Persons available available</NotFoundTitle> :
+                        <CardContainer>
+                            {persons.map((person: any) => {
+                                return (
+                                    <Card key={person.id}>
+                                        <Trash onClick={() => this.handleDelete(person.id)}>
+                                            <img src="https://img.icons8.com/carbon-copy/35/000000/trash.png" />
+                                        </Trash>
+                                        <h3><PrimaryText>First Name:</PrimaryText> {person.firstName}</h3>
+                                        <h3><PrimaryText>Last Name:</PrimaryText> {person.lastName}</h3>
+                                        <Link to={`/persons/${person.id}`} >
+                                            <GoConer className="go-corner">
+                                                <div className="go-arrow">
+                                                    →
+                                                </div>
+                                            </GoConer>
+                                        </Link>
+                                    </Card>
+                                )
+                            })}
+                        </CardContainer>
+                }
             </Div>
         )
     }

@@ -10,12 +10,12 @@ type MedicalRecord @model @auth(rules: [{allow: public}]) {
   firstName: String
   lastName: String
   birthDate: String
-  medications: String
-  allergies: String
-  Person: Person @connection
+  medications: [String]
+  allergies: [String]
+  People: [Person] @connection(keyName: "byMedicalRecord", fields: ["id"])
 }
 
-type Person @model @auth(rules: [{allow: public}]) @key(name: "byFirestation", fields: ["firestationID"]) {
+type Person @model @auth(rules: [{allow: public}]) @key(name: "byFirestation", fields: ["firestationID"]) @key(name: "byMedicalRecord", fields: ["medicalrecordID"]) {
   id: ID!
   firstName: String
   lastName: String
@@ -25,5 +25,6 @@ type Person @model @auth(rules: [{allow: public}]) @key(name: "byFirestation", f
   phone: String
   email: String
   firestationID: ID
+  medicalrecordID: ID
 }
  
