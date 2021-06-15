@@ -42,10 +42,7 @@ export default class MedicalRecords extends Component<Props, State> {
                     <Nav persons home firestation />
                 </div>
                 <ActionNav>
-                    <h1>All Records</h1>
-                    <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} >
-                        Add a Record
-                    </AnimatedButtonStyle>
+                    <h1>{records.length} Medical Records</h1>
                 </ActionNav>
                 {records.length === 0 ?   <NotFoundTitle>Sorry no records available</NotFoundTitle>: <CardContainer>
                     

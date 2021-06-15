@@ -71,7 +71,7 @@ export const Card = styled.div`
     max-width: 262px;
     /* background-color: #f2f8f9; */
     border-radius: 4px;
-    padding: 32px 24px;
+    padding: 32px 44px;
     margin: 12px;
     text-decoration: none;
     z-index: 0;
@@ -94,7 +94,7 @@ export const Card = styled.div`
     }
 
     &:hover:before {
-        transform: scale(21);
+        transform: scale(31);
     }
     h3{
         display: flex;

@@ -3,51 +3,50 @@ import { Card } from '../../styles/Card'
 import { CardContainer, PrimaryText } from '../../styles/main'
 
 interface Props {
-    person: any;
-    firestation: any;
+    record: any;
 }
 
-export default function RecordInfoComponent({ person, firestation }: Props): ReactElement {
+export default function RecordInfoComponent({ record }: Props): ReactElement {
     return (
         <div style={{ display: 'flex', margin: "3em", flexWrap: 'wrap', justifyContent: 'center' }} >
             <div>
-                {person.map((person: any) => {
+                {record.map((record: any) => {
                     return (
                         <Card>
                             <h1>Personal Info</h1>
-                            <h3><PrimaryText>First Name:</PrimaryText> {person.firstName}</h3>
-                            <h3><PrimaryText>Last Name:</PrimaryText> {person.lastName}</h3>
+                            <h3><PrimaryText>First Name:</PrimaryText> {record.firstName}</h3>
+                            <h3><PrimaryText>Last Name:</PrimaryText> {record.lastName}</h3>
+                            <h3><PrimaryText>Birth Date:</PrimaryText> {record.birthDate}</h3>
                         </Card>
                     )
                 })}
-                {person.map((person: any) => {
+                
+            </div>
+            <div>
+            {record.map((record: any) => {
                     return (
                         <Card>
-                            <h1>Contact</h1>
-                            <h3><PrimaryText>Email:</PrimaryText> {person.email}</h3>
-                            <h3><PrimaryText>Phone:</PrimaryText> {person.phone}</h3>
-                        </Card>
+                        <h1>Allergies</h1>
+                        <h3>
+                            <ul style={{margin: "0px"}}>
+                                {record.allergies.map((txt: any) => <li>{txt}</li>)}
+                            </ul>
+                        </h3>
+                    </Card>
                     )
                 })}
             </div>
             <div>
-                {person.map((person: any) => {
+            {record.map((record: any) => {
                     return (
                         <Card>
-                            <h1>Location</h1>
-                            <h3><PrimaryText>Adddress:</PrimaryText> {person.adddress}</h3>
-                            <h3><PrimaryText>City:</PrimaryText> {person.city}</h3>
-                            <h3><PrimaryText>Zip:</PrimaryText> {person.zip}</h3>
-                        </Card>
-                    )
-                })}
-                {firestation.map((firestation: any) => {
-                    return (
-                        <Card>
-                            <h1>Firestation</h1>
-                            <h3><PrimaryText>Station:</PrimaryText> {firestation.station}</h3>
-                            <h3><PrimaryText>Address</PrimaryText> {firestation.address}</h3>
-                        </Card>
+                        <h1>Medications</h1>
+                        <h3>
+                            <ul style={{margin: "0px"}}>
+                                {record.medications.map((txt: any) => <li>{txt}</li>)}
+                            </ul>
+                        </h3>
+                    </Card>
                     )
                 })}
             </div>

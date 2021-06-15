@@ -31,7 +31,7 @@ export default function PersonInfoComponent({ person, firestation, medicalRecord
                     )
                 })}
             </div>
-            <div>
+            {/* <div> */}
                 {person.map((person: any) => {
                     return (
                         <Card key={person.id}>
@@ -73,7 +73,7 @@ export default function PersonInfoComponent({ person, firestation, medicalRecord
                         </Card>
                     )
                 })}
-            </div>
+            {/* </div> */}
         </div>
     )
 }

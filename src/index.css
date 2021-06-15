@@ -23,7 +23,7 @@ form {
     width: 100%;
     height: 44px;
     line-height: 44px;
-    margin: 0px 20px;
+    margin: 20px;
   }
   label {
     position: absolute;
@@ -34,7 +34,7 @@ form {
     transition: 0.2s all;
     cursor: text;
   }
-  input, select {
+  input {
     width: 100%;
     border: 0;
     outline: 0;

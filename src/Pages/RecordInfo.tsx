@@ -48,7 +48,6 @@ export default class RecordInfo extends Component<Props, State> {
             birthDate: record[0].birthDate,
             allergies: record[0].allergies,
             medications: record[0].medications,
-            // medicalRecordPersonId: record[0].medicalRecordPersonId,
         })
     }
     handleSubmit = async (e?: any) => {
@@ -58,7 +57,11 @@ export default class RecordInfo extends Component<Props, State> {
         const updatedStation = await DataStore.save(
             // @ts-ignore
             MedicalRecord.copyOf(CURRENT, r => {
-
+                r.firstName=  this.state.firstName;
+                r.lastName=  this.state.lastName;
+                r.birthDate=  this.state.birthDate;
+                r.allergies=  this.state.allergies;
+                r.medications=  this.state.medications;
           })
         );
         const record= await DataStore.query(MedicalRecord, c => c.id("eq", `${this.state.id}`));
@@ -84,8 +87,22 @@ export default class RecordInfo extends Component<Props, State> {
         DataStore.delete(todelete);
         window.location.href = "/medical-records";
     }
+    handleMedicationsChange = (newValue: any, actionMeta: any) => {
+        let medications = [];
+        if (actionMeta.option.value) {
+            medications.push(actionMeta.option.value)
+        }
+        console.log(medications)
+        this.setState({ medications})
+    };
+    handleAllergiesChange = (newValue: any, actionMeta: any) => {
+        let allergies = this.state.allergies;
+        if (actionMeta.option.value) {
+            allergies.push(actionMeta.option.value)
+        }
+    };
     render() {
-        const { persons, isOpen } = this.state;
+        const { record, isOpen, allergies } = this.state;
         return (
             <div>
                 <AnimatedButtonStyle whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => window.history.back()}>
@@ -101,13 +118,15 @@ export default class RecordInfo extends Component<Props, State> {
                         Delete Record
                     </AnimatedButtonStyle>
                 </ActionNav>
+                <RecordInfoComponent record={record}/>
                 <Modal isOpen={isOpen} handleClose={() => this.handlAnimated(false)}>
                     <RecordForm
                         values={this.state}
                         handleChange={this.handleChange}
                         handleSubmit={this.handleSubmit}
-                        handleAllergiesChange=""
-                        handleMedicationsChange={"hello"}
+                        handleAllergiesChange={this.handleAllergiesChange}
+                        handleMedicationsChange={this.handleMedicationsChange}
+                        allergiesDefaultValue={allergies.map((value: any) => value)}
                         button={
                             <AnimatedButtonStyle type="submit" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => this.handlAnimated(false)}>
                                 Save

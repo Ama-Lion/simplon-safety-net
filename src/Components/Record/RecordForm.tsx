@@ -15,6 +15,7 @@ interface Props {
         allergies: any;
         medications: any;
     }
+    allergiesDefaultValue?: any;
 
 }
 const medications = [
@@ -32,7 +33,7 @@ const allergies = [
     { value: 'aznol', label: 'Aznol' },
   ]
 
-export default function RecordForm({handleChange, handleSubmit, button, values, handleMedicationsChange, handleAllergiesChange}: Props): ReactElement {
+export default function RecordForm({handleChange, handleSubmit, button, values, handleMedicationsChange, handleAllergiesChange, allergiesDefaultValue}: Props): ReactElement {
     return (
         <form  onSubmit={handleSubmit} >
         <div className="form-fields">
@@ -55,6 +56,7 @@ export default function RecordForm({handleChange, handleSubmit, button, values, 
             onChange={handleAllergiesChange}
             options={allergies}
             placeholder="Allergies"
+            defaultValue={allergiesDefaultValue}
       />
         <CreatableSelect
           isClearable

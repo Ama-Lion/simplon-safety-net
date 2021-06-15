@@ -11,7 +11,7 @@ export default function FirestationInfoComponent({ persons }: Props): ReactEleme
     return (
         <div style={{ display: 'flex', margin: "3em", flexWrap: 'wrap', justifyContent: 'center' }} >
                   {
-                    persons.length === 0 ?   <NotFoundTitle>Sorry no Persons available available</NotFoundTitle>: 
+                    persons.length === 0 ?   <NotFoundTitle>Sorry no Persons available</NotFoundTitle>: 
             <CardContainer>
                 {persons.map((person: any) => {
                     return (

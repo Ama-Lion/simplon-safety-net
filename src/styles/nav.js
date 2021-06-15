@@ -97,6 +97,6 @@ export const ActionNav = styled.div`
              -5px -5px 10px #ffffff;
     h1{
       color: #ab0521;
-      margin-left: 20px;
+      margin: 10px 20px;
     }
 `;
